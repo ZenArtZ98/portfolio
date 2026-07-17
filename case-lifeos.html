@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="LifeOS engineering case study by Sergey Panfilov: Android, Kotlin, Python, Markdown/YAML and Google Calendar." />
+    <meta name="theme-color" content="#07111f" />
+    <meta property="og:title" content="LifeOS 0.4 — Engineering case study" />
+    <meta property="og:description" content="A local-first personal operating system with safe file operations and a Google Calendar bridge." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://zenartz98.github.io/portfolio/case-lifeos.html" />
+    <meta property="og:image" content="https://zenartz98.github.io/portfolio/assets/og-portfolio.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://zenartz98.github.io/portfolio/case-lifeos.html" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <title>LifeOS 0.4 — Sergey Panfilov</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Sergey Panfilov — home">
+        <span class="brand-mark">SP</span><span>Sergey Panfilov</span>
+      </a>
+      <nav aria-label="Case study navigation">
+        <a href="index.html#projects" data-en="Projects" data-ru="Проекты">Projects</a>
+        <a href="#architecture" data-en="Architecture" data-ru="Архитектура">Architecture</a>
+        <a href="#decisions" data-en="Decisions" data-ru="Решения">Decisions</a>
+        <a href="#code" data-en="Code" data-ru="Код">Code</a>
+      </nav>
+      <div class="header-controls">
+        <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme"><span aria-hidden="true">◐</span></button>
+        <button class="language-toggle" type="button" aria-label="Switch language"><span data-lang-active>EN</span><span aria-hidden="true"> / </span><span data-lang-inactive>RU</span></button>
+      </div>
+    </header>
+
+    <main class="case-main" id="main">
+      <section class="case-hero">
+        <div>
+          <div class="case-kicker"><span>CASE 01</span><span>VERSION 0.4</span><span>PRIVATE SOURCE</span></div>
+          <p class="eyebrow">Android · Python · Local-first</p>
+          <h1>LifeOS</h1>
+          <p class="case-lead" data-en="A personal operating system that treats Markdown and YAML as the source of truth, adds an Android interface, and synchronizes confirmed events with Google Calendar through a defensive Python bridge." data-ru="Личная операционная система, в которой Markdown и YAML остаются источником истины, Android-приложение даёт удобный интерфейс, а защищённый Python-мост синхронизирует подтверждённые события с Google Calendar.">A personal operating system that treats Markdown and YAML as the source of truth, adds an Android interface, and synchronizes confirmed events with Google Calendar through a defensive Python bridge.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#architecture" data-en="Explore architecture" data-ru="Посмотреть архитектуру">Explore architecture</a>
+            <a class="button secondary" href="index.html#resumes" data-en="Download CV" data-ru="Скачать резюме">Download CV</a>
+          </div>
+        </div>
+        <aside class="case-fact-panel" aria-label="Project facts">
+          <div class="case-fact"><span data-en="Role" data-ru="Роль">Role</span><span data-en="Product owner & developer" data-ru="Автор продукта и разработчик">Product owner & developer</span></div>
+          <div class="case-fact"><span data-en="Stack" data-ru="Стек">Stack</span><span>Kotlin · Compose · Python</span></div>
+          <div class="case-fact"><span data-en="Data" data-ru="Данные">Data</span><span>Markdown · YAML · JSON</span></div>
+          <div class="case-fact"><span data-en="Verification" data-ru="Проверка">Verification</span><span data-en="38 unit + 2 instrumented tests" data-ru="38 unit + 2 инструментальных теста">38 unit + 2 instrumented tests</span></div>
+          <div class="case-fact"><span data-en="Status" data-ru="Статус">Status</span><span data-en="Working MVP, private source" data-ru="Работающий MVP, закрытый код">Working MVP, private source</span></div>
+        </aside>
+      </section>
+
+      <section class="case-section" id="problem">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Problem" data-ru="Задача">Problem</p><h2 data-en="Keep personal data portable without losing product ergonomics." data-ru="Сохранить переносимость личных данных без потери удобства продукта.">Keep personal data portable without losing product ergonomics.</h2></div>
+          <p data-en="Conventional task managers lock structure inside a database or cloud account. LifeOS keeps human-readable files as the canonical state, while the application layer adds search, notifications, event workflows and calendar integration." data-ru="Обычные планировщики запирают структуру внутри базы данных или облачного аккаунта. LifeOS сохраняет человекочитаемые файлы как каноническое состояние, а прикладной слой добавляет поиск, уведомления, работу с событиями и интеграцию с календарём.">Conventional task managers lock structure inside a database or cloud account. LifeOS keeps human-readable files as the canonical state, while the application layer adds search, notifications, event workflows and calendar integration.</p>
+        </div>
+        <div class="case-copy-grid">
+          <article><span>01 / PORTABILITY</span><h3 data-en="Files stay useful" data-ru="Файлы остаются полезными">Files stay useful</h3><p data-en="Projects and events remain readable and editable outside the application." data-ru="Проекты и события можно читать и редактировать вне приложения.">Projects and events remain readable and editable outside the application.</p></article>
+          <article><span>02 / SAFETY</span><h3 data-en="Writes must be defensive" data-ru="Защищённая запись">Writes must be defensive</h3><p data-en="The bridge checks for concurrent changes and uses temporary files, fsync and atomic replacement." data-ru="Мост проверяет параллельные изменения и использует временные файлы, fsync и атомарную замену.">The bridge checks for concurrent changes and uses temporary files, fsync and atomic replacement.</p></article>
+          <article><span>03 / INTEGRATION</span><h3 data-en="Calendar without duplication" data-ru="Календарь без дублей">Calendar without duplication</h3><p data-en="Stable synchronization identifiers and conflict recovery prevent repeated event creation." data-ru="Стабильные идентификаторы синхронизации и восстановление после конфликтов предотвращают дубли событий.">Stable synchronization identifiers and conflict recovery prevent repeated event creation.</p></article>
+        </div>
+      </section>
+
+      <section class="case-section" id="architecture">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Architecture" data-ru="Архитектура">Architecture</p><h2 data-en="Four layers, one explicit source of truth." data-ru="Четыре слоя и один явный источник истины.">Four layers, one explicit source of truth.</h2></div>
+          <p data-en="The Android client never becomes the only place where data exists. Markdown/YAML remains canonical; integrations work through validated and recoverable boundaries." data-ru="Android-клиент не становится единственным местом хранения данных. Markdown/YAML остаётся каноническим источником, а интеграции работают через валидируемые и восстанавливаемые границы.">The Android client never becomes the only place where data exists. Markdown/YAML remains canonical; integrations work through validated and recoverable boundaries.</p>
+        </div>
+        <div class="architecture-flow" aria-label="LifeOS architecture">
+          <div class="architecture-node"><small>01 / CLIENT</small><strong>Android · Compose</strong><span data-en="Navigation, local notifications and product UI" data-ru="Навигация, локальные уведомления и интерфейс">Navigation, local notifications and product UI</span></div>
+          <div class="architecture-node"><small>02 / SOURCE</small><strong>Markdown · YAML</strong><span data-en="Portable projects, events and metadata" data-ru="Переносимые проекты, события и метаданные">Portable projects, events and metadata</span></div>
+          <div class="architecture-node"><small>03 / BRIDGE</small><strong>Python</strong><span data-en="Validation, OAuth, safe writes and synchronization" data-ru="Валидация, OAuth, безопасная запись и синхронизация">Validation, OAuth, safe writes and synchronization</span></div>
+          <div class="architecture-node"><small>04 / EXTERNAL</small><strong>Google Calendar API</strong><span data-en="Owned event scope and stable event identifiers" data-ru="Ограниченная область событий и стабильные идентификаторы">Owned event scope and stable event identifiers</span></div>
+        </div>
+      </section>
+
+      <section class="case-section" id="decisions">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Engineering decisions" data-ru="Инженерные решения">Engineering decisions</p><h2 data-en="Failure cases were designed before polish." data-ru="Сначала отказоустойчивость, затем полировка.">Failure cases were designed before polish.</h2></div>
+          <p data-en="AI tools helped with decomposition, implementation alternatives and review. The final behavior was constrained by specifications, tests and real-device checks." data-ru="AI-инструменты помогали с декомпозицией, вариантами реализации и ревью. Итоговое поведение ограничивалось спецификациями, тестами и проверками на реальном устройстве.">AI tools helped with decomposition, implementation alternatives and review. The final behavior was constrained by specifications, tests and real-device checks.</p>
+        </div>
+        <div class="decision-list">
+          <article><h3 data-en="Optimistic conflict detection" data-ru="Оптимистичная проверка конфликтов">Optimistic conflict detection</h3><p data-en="Before updating frontmatter, the bridge compares current disk content with the version that was originally loaded." data-ru="Перед изменением frontmatter мост сравнивает содержимое на диске с ранее загруженной версией.">Before updating frontmatter, the bridge compares current disk content with the version that was originally loaded.</p></article>
+          <article><h3 data-en="Atomic file replacement" data-ru="Атомарная замена файла">Atomic file replacement</h3><p data-en="A temporary file is flushed and synchronized before os.replace changes the original path." data-ru="Временный файл сбрасывается и синхронизируется до того, как os.replace заменит исходный путь.">A temporary file is flushed and synchronized before os.replace changes the original path.</p></article>
+          <article><h3 data-en="Idempotent synchronization" data-ru="Идемпотентная синхронизация">Idempotent synchronization</h3><p data-en="A Google-compatible sync UID and recovery from HTTP 409 handle the case where an event already exists." data-ru="Google-совместимый sync UID и восстановление после HTTP 409 обрабатывают уже созданное событие.">A Google-compatible sync UID and recovery from HTTP 409 handle the case where an event already exists.</p></article>
+          <article><h3 data-en="Narrow OAuth scope" data-ru="Узкая область OAuth">Narrow OAuth scope</h3><p data-en="The bridge requests access only to events owned by the application instead of the entire calendar account." data-ru="Мост запрашивает доступ только к событиям приложения, а не ко всему календарному аккаунту.">The bridge requests access only to events owned by the application instead of the entire calendar account.</p></article>
+        </div>
+      </section>
+
+      <section class="case-section" id="code">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Selected code" data-ru="Фрагмент кода">Selected code</p><h2 data-en="Protect the user's file before changing it." data-ru="Сначала защитить пользовательский файл.">Protect the user's file before changing it.</h2></div>
+          <p data-en="This shortened fragment comes from the real Python bridge. It combines an optimistic concurrency check with an atomic filesystem update." data-ru="Сокращённый фрагмент взят из реального Python-моста. Он объединяет оптимистичную проверку конкурентных изменений и атомарное обновление файловой системы.">This shortened fragment comes from the real Python bridge. It combines an optimistic concurrency check with an atomic filesystem update.</p>
+        </div>
+        <div class="code-window case-code">
+          <div class="code-toolbar"><span class="code-tab is-active">LifeOSBridge/lifeos_bridge.py</span><span class="code-source">Python</span></div>
+          <div class="code-panel">
+            <pre><code><span class="syntax-key">def</span> <span class="syntax-fn">update_properties_atomic</span>(document, updates):
+    current = document.path.read_text(encoding=<span class="syntax-str">"utf-8"</span>)
+    <span class="syntax-key">if</span> current != document.content:
+        <span class="syntax-key">raise</span> BridgeError(
+            <span class="syntax-str">f"Document changed during operation: {document.path}"</span>
+        )
+
+    fd, temp_name = tempfile.mkstemp(
+        prefix=document.path.name + <span class="syntax-str">"."</span>,
+        suffix=<span class="syntax-str">".tmp"</span>,
+        dir=document.path.parent,
+    )
+    <span class="syntax-key">with</span> os.fdopen(fd, <span class="syntax-str">"w"</span>, encoding=<span class="syntax-str">"utf-8"</span>) <span class="syntax-key">as</span> stream:
+        stream.write(rendered_content)
+        stream.flush()
+        os.fsync(stream.fileno())
+    os.replace(temp_name, document.path)</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Next iteration" data-ru="Следующая итерация">Next iteration</p><h2 data-en="Turn the working MVP into a demonstrable product." data-ru="Превратить работающий MVP в демонстрируемый продукт.">Turn the working MVP into a demonstrable product.</h2></div>
+          <p data-en="The next public milestone is a short product video, sanitized screenshots, automated builds and a small open-source extraction of the safe Markdown synchronization layer." data-ru="Следующая публичная веха — короткое видео продукта, обезличенные скриншоты, автоматические сборки и небольшой open-source модуль безопасной синхронизации Markdown.">The next public milestone is a short product video, sanitized screenshots, automated builds and a small open-source extraction of the safe Markdown synchronization layer.</p>
+        </div>
+      </section>
+
+      <nav class="case-nav" aria-label="Case study navigation">
+        <a class="case-back" href="index.html#projects" data-en="← Back to all projects" data-ru="← Ко всем проектам">← Back to all projects</a>
+        <a class="text-link" href="case-ping-hosts.html" data-en="Next case: Ping Hosts →" data-ru="Следующий кейс: Ping Hosts →">Next case: Ping Hosts →</a>
+      </nav>
+    </main>
+
+    <footer><span>© <span data-year></span> Sergey Panfilov</span><span data-en="Engineering case study · LifeOS 0.4" data-ru="Инженерный кейс · LifeOS 0.4">Engineering case study · LifeOS 0.4</span></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
