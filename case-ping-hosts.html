@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Ping Hosts fullstack case study by Sergey Panfilov: FastAPI, SQLAlchemy, React, TypeScript and Docker." />
+    <meta name="theme-color" content="#07111f" />
+    <meta property="og:title" content="Ping Hosts — Fullstack case study" />
+    <meta property="og:description" content="Containerized host monitoring with a FastAPI backend, React frontend and CSV workflows." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://zenartz98.github.io/portfolio/case-ping-hosts.html" />
+    <meta property="og:image" content="https://zenartz98.github.io/portfolio/assets/og-portfolio.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://zenartz98.github.io/portfolio/case-ping-hosts.html" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <title>Ping Hosts — Sergey Panfilov</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Sergey Panfilov — home"><span class="brand-mark">SP</span><span>Sergey Panfilov</span></a>
+      <nav aria-label="Case study navigation">
+        <a href="index.html#projects" data-en="Projects" data-ru="Проекты">Projects</a>
+        <a href="#architecture" data-en="Architecture" data-ru="Архитектура">Architecture</a>
+        <a href="#interface" data-en="Interface" data-ru="Интерфейс">Interface</a>
+        <a href="#code" data-en="Code" data-ru="Код">Code</a>
+      </nav>
+      <div class="header-controls">
+        <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme"><span aria-hidden="true">◐</span></button>
+        <button class="language-toggle" type="button" aria-label="Switch language"><span data-lang-active>EN</span><span aria-hidden="true"> / </span><span data-lang-inactive>RU</span></button>
+      </div>
+    </header>
+
+    <main class="case-main" id="main">
+      <section class="case-hero">
+        <div>
+          <div class="case-kicker"><span>CASE 02</span><span>OPEN SOURCE</span><span>FULLSTACK</span></div>
+          <p class="eyebrow">FastAPI · React · Docker</p>
+          <h1>Ping Hosts</h1>
+          <p class="case-lead" data-en="A containerized host-monitoring application with CRUD operations, background ping collection, sortable statistics and CSV import/export." data-ru="Контейнеризированное приложение для мониторинга хостов с CRUD, фоновым сбором ping-статистики, сортировкой и импортом/экспортом CSV.">A containerized host-monitoring application with CRUD operations, background ping collection, sortable statistics and CSV import/export.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://github.com/ZenArtZ98/ping_hosts" target="_blank" rel="noreferrer" data-en="View source ↗" data-ru="Открыть код ↗">View source ↗</a>
+            <a class="button secondary" href="#architecture" data-en="Explore architecture" data-ru="Посмотреть архитектуру">Explore architecture</a>
+          </div>
+        </div>
+        <aside class="case-fact-panel" aria-label="Project facts">
+          <div class="case-fact"><span data-en="Role" data-ru="Роль">Role</span><span data-en="Fullstack developer" data-ru="Fullstack-разработчик">Fullstack developer</span></div>
+          <div class="case-fact"><span data-en="Backend" data-ru="Backend">Backend</span><span>FastAPI · SQLAlchemy · SQLite</span></div>
+          <div class="case-fact"><span data-en="Frontend" data-ru="Frontend">Frontend</span><span>React · TypeScript · Axios</span></div>
+          <div class="case-fact"><span data-en="Delivery" data-ru="Запуск">Delivery</span><span>Docker Compose</span></div>
+          <div class="case-fact"><span data-en="Status" data-ru="Статус">Status</span><span data-en="Public technical project" data-ru="Публичный технический проект">Public technical project</span></div>
+        </aside>
+      </section>
+
+      <section class="case-section" id="problem">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Problem" data-ru="Задача">Problem</p><h2 data-en="Make network availability visible without manual checks." data-ru="Сделать доступность сети видимой без ручных проверок.">Make network availability visible without manual checks.</h2></div>
+          <p data-en="The system keeps a managed host list, periodically collects response data and exposes operational statistics through a simple web interface. Docker Compose makes the frontend and backend reproducible as one unit." data-ru="Система хранит управляемый список хостов, периодически собирает данные отклика и показывает рабочую статистику через простой веб-интерфейс. Docker Compose воспроизводимо запускает frontend и backend как единое целое.">The system keeps a managed host list, periodically collects response data and exposes operational statistics through a simple web interface. Docker Compose makes the frontend and backend reproducible as one unit.</p>
+        </div>
+        <div class="case-copy-grid">
+          <article><span>01 / CRUD</span><h3 data-en="Host management" data-ru="Управление хостами">Host management</h3><p data-en="Add, edit and remove validated IP addresses through a REST API." data-ru="Добавление, редактирование и удаление валидируемых IP-адресов через REST API.">Add, edit and remove validated IP addresses through a REST API.</p></article>
+          <article><span>02 / MONITORING</span><h3 data-en="Background collection" data-ru="Фоновый сбор">Background collection</h3><p data-en="An application worker performs repeated pings and stores latency, delivery and loss percentages." data-ru="Фоновый worker выполняет повторные ping-запросы и сохраняет задержку, процент доставки и потерь.">An application worker performs repeated pings and stores latency, delivery and loss percentages.</p></article>
+          <article><span>03 / DATA FLOW</span><h3 data-en="CSV workflows" data-ru="Работа с CSV">CSV workflows</h3><p data-en="Bulk host import and statistics export keep the tool useful outside its own interface." data-ru="Массовый импорт хостов и экспорт статистики позволяют использовать данные вне интерфейса.">Bulk host import and statistics export keep the tool useful outside its own interface.</p></article>
+        </div>
+      </section>
+
+      <section class="case-section" id="architecture">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Architecture" data-ru="Архитектура">Architecture</p><h2 data-en="A small system with visible boundaries." data-ru="Небольшая система с понятными границами.">A small system with visible boundaries.</h2></div>
+          <p data-en="The interface consumes a documented REST surface. Persistence and monitoring stay behind the backend boundary, while Docker Compose defines the delivery topology." data-ru="Интерфейс работает с документированной REST-поверхностью. Хранение данных и мониторинг остаются за границей backend, а Docker Compose описывает топологию запуска.">The interface consumes a documented REST surface. Persistence and monitoring stay behind the backend boundary, while Docker Compose defines the delivery topology.</p>
+        </div>
+        <div class="architecture-flow" aria-label="Ping Hosts architecture">
+          <div class="architecture-node"><small>01 / UI</small><strong>React · TypeScript</strong><span data-en="CRUD, sorting, countdown and CSV actions" data-ru="CRUD, сортировка, таймер и операции с CSV">CRUD, sorting, countdown and CSV actions</span></div>
+          <div class="architecture-node"><small>02 / API</small><strong>FastAPI · Pydantic</strong><span data-en="Validation and REST endpoints" data-ru="Валидация и REST endpoints">Validation and REST endpoints</span></div>
+          <div class="architecture-node"><small>03 / DATA</small><strong>SQLAlchemy · SQLite</strong><span data-en="Hosts and collected statistics" data-ru="Хосты и собранная статистика">Hosts and collected statistics</span></div>
+          <div class="architecture-node"><small>04 / WORKER</small><strong>asyncio · ping3</strong><span data-en="Periodic availability collection" data-ru="Периодический сбор доступности">Periodic availability collection</span></div>
+        </div>
+      </section>
+
+      <section class="case-section" id="interface">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Interface structure" data-ru="Структура интерфейса">Interface structure</p><h2 data-en="Operational data at a glance." data-ru="Рабочие данные в одном экране.">Operational data at a glance.</h2></div>
+          <p data-en="This interface map is based on the implemented React screen: host actions, refresh countdown, status coloring and sortable statistics." data-ru="Эта схема интерфейса основана на реализованном React-экране: действия с хостами, таймер обновления, цветовые статусы и сортируемая статистика.">This interface map is based on the implemented React screen: host actions, refresh countdown, status coloring and sortable statistics.</p>
+        </div>
+        <div class="interface-map" aria-label="Ping Hosts interface map">
+          <aside class="interface-sidebar"><strong>Ping Hosts</strong><span>Overview</span><span>Hosts</span><span>CSV import</span><span>Export</span></aside>
+          <div class="interface-content">
+            <div class="interface-topbar"><div><strong data-en="Network overview" data-ru="Обзор сети">Network overview</strong><div class="project-proof" data-en="next refresh in 10s" data-ru="обновление через 10с">next refresh in 10s</div></div><span class="interface-button" data-en="+ Add host" data-ru="+ Добавить хост">+ Add host</span></div>
+            <div class="host-table">
+              <div class="host-row header"><span>Host</span><span>Ping</span><span>Delivered</span><span>Last success</span></div>
+              <div class="host-row"><span>8.8.8.8</span><span>28 ms</span><span class="ok">100%</span><span>16:42:11</span></div>
+              <div class="host-row"><span>1.1.1.1</span><span>34 ms</span><span class="ok">100%</span><span>16:42:10</span></div>
+              <div class="host-row"><span>192.0.2.1</span><span>n/a</span><span class="warn">0%</span><span>n/a</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section" id="code">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Selected code" data-ru="Фрагмент кода">Selected code</p><h2 data-en="Validate the boundary before persistence." data-ru="Проверить границу до сохранения.">Validate the boundary before persistence.</h2></div>
+          <p data-en="The real endpoint uses Pydantic's IPvAnyAddress, rejects duplicates and returns the persisted SQLAlchemy entity through the response model." data-ru="Реальный endpoint использует IPvAnyAddress из Pydantic, отклоняет дубли и возвращает сохранённую SQLAlchemy-сущность через response model.">The real endpoint uses Pydantic's IPvAnyAddress, rejects duplicates and returns the persisted SQLAlchemy entity through the response model.</p>
+        </div>
+        <div class="code-window case-code">
+          <div class="code-toolbar"><span class="code-tab is-active">backend/main.py</span><span class="code-source">FastAPI</span></div>
+          <div class="code-panel"><pre><code><span class="syntax-dec">@app.post</span>(<span class="syntax-str">"/hosts"</span>, response_model=Host)
+<span class="syntax-key">def</span> <span class="syntax-fn">add_host</span>(host: Host, db: Session = Depends(get_db)):
+    duplicate = db.query(HostDB).filter(
+        HostDB.ip == str(host.ip)
+    ).first()
+    <span class="syntax-key">if</span> duplicate:
+        <span class="syntax-key">raise</span> HTTPException(
+            status_code=<span class="syntax-num">400</span>,
+            detail=<span class="syntax-str">"IP already exists"</span>,
+        )
+
+    db_host = HostDB(id=host.id, ip=str(host.ip))
+    db.add(db_host)
+    db.commit()
+    db.refresh(db_host)
+    <span class="syntax-key">return</span> db_host</code></pre></div>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <div class="case-section-head">
+          <div><p class="eyebrow" data-en="Next iteration" data-ru="Следующая итерация">Next iteration</p><h2 data-en="From technical task to production-shaped service." data-ru="От технического задания к сервису production-уровня.">From technical task to production-shaped service.</h2></div>
+          <p data-en="The next engineering iteration would separate API, service and repository layers, add migrations and automated tests, move monitoring into a dedicated worker, and introduce CI for the Docker build." data-ru="В следующей инженерной итерации я бы разделил API, service и repository-слои, добавил миграции и автоматические тесты, вынес мониторинг в отдельный worker и настроил CI для Docker-сборки.">The next engineering iteration would separate API, service and repository layers, add migrations and automated tests, move monitoring into a dedicated worker, and introduce CI for the Docker build.</p>
+        </div>
+      </section>
+
+      <nav class="case-nav" aria-label="Case study navigation">
+        <a class="case-back" href="case-lifeos.html" data-en="← Previous case: LifeOS" data-ru="← Предыдущий кейс: LifeOS">← Previous case: LifeOS</a>
+        <a class="text-link" href="index.html#projects" data-en="Back to all projects →" data-ru="Ко всем проектам →">Back to all projects →</a>
+      </nav>
+    </main>
+
+    <footer><span>© <span data-year></span> Sergey Panfilov</span><span data-en="Fullstack case study · Ping Hosts" data-ru="Fullstack-кейс · Ping Hosts">Fullstack case study · Ping Hosts</span></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
