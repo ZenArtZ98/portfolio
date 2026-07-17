@@ -50,22 +50,95 @@ const translations = {
 const languageToggle = document.querySelector(".language-toggle");
 const activeLabel = document.querySelector("[data-lang-active]");
 const inactiveLabel = document.querySelector("[data-lang-inactive]");
+const themeToggle = document.querySelector(".theme-toggle");
 let language = localStorage.getItem("portfolio-language") || "en";
+let theme = localStorage.getItem("portfolio-theme") || "dark";
 
 function applyLanguage(nextLanguage) {
   language = nextLanguage;
   document.documentElement.lang = language;
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const key = element.dataset.i18n;
-    if (translations[language][key]) element.textContent = translations[language][key];
+    if (translations[language]?.[key]) element.textContent = translations[language][key];
   });
-  activeLabel.textContent = language.toUpperCase();
-  inactiveLabel.textContent = language === "en" ? "RU" : "EN";
-  languageToggle.setAttribute("aria-label", language === "en" ? "Переключить на русский" : "Switch to English");
+  document.querySelectorAll("[data-en][data-ru]").forEach((element) => {
+    element.textContent = element.dataset[language];
+  });
+  if (activeLabel) activeLabel.textContent = language.toUpperCase();
+  if (inactiveLabel) inactiveLabel.textContent = language === "en" ? "RU" : "EN";
+  if (languageToggle) {
+    languageToggle.setAttribute("aria-label", language === "en" ? "Переключить на русский" : "Switch to English");
+  }
+  const terminalInput = document.querySelector("[data-terminal-input]");
+  if (terminalInput) terminalInput.placeholder = language === "en" ? "type a command" : "введите команду";
   localStorage.setItem("portfolio-language", language);
 }
 
-languageToggle.addEventListener("click", () => applyLanguage(language === "en" ? "ru" : "en"));
-document.querySelector("[data-year]").textContent = new Date().getFullYear();
+function applyTheme(nextTheme) {
+  theme = nextTheme;
+  document.documentElement.dataset.theme = theme;
+  if (themeToggle) {
+    const label = theme === "dark" ? "Switch to light theme" : "Switch to dark theme";
+    themeToggle.setAttribute("aria-label", label);
+    themeToggle.setAttribute("title", label);
+  }
+  localStorage.setItem("portfolio-theme", theme);
+}
+
+languageToggle?.addEventListener("click", () => applyLanguage(language === "en" ? "ru" : "en"));
+themeToggle?.addEventListener("click", () => applyTheme(theme === "dark" ? "light" : "dark"));
+document.querySelectorAll("[data-year]").forEach((element) => {
+  element.textContent = new Date().getFullYear();
+});
+applyTheme(theme);
 applyLanguage(language);
 
+const terminalForm = document.querySelector("[data-terminal-form]");
+const terminalInput = document.querySelector("[data-terminal-input]");
+const terminalOutput = document.querySelector("[data-terminal-output]");
+const terminalResponses = {
+  en: {
+    help: "Commands: about · projects · stack · contact · clear",
+    about: "Sergey Panfilov — developer focused on AI automation, Python backend and product systems.",
+    projects: "LifeOS 0.4 · Sophyte · Ping Hosts · Content Moderation Prototype",
+    stack: "Python · FastAPI · SQL · Docker · React · Kotlin · BPMN · ChatGPT · Codex",
+    contact: "Email: sergey.volkov98@yandex.ru · Telegram: @zenartz98"
+  },
+  ru: {
+    help: "Команды: about · projects · stack · contact · clear",
+    about: "Сергей Панфилов — разработчик в AI-автоматизации, Python backend и продуктовых системах.",
+    projects: "LifeOS 0.4 · Sophyte · Ping Hosts · прототип модерации",
+    stack: "Python · FastAPI · SQL · Docker · React · Kotlin · BPMN · ChatGPT · Codex",
+    contact: "Email: sergey.volkov98@yandex.ru · Telegram: @zenartz98"
+  }
+};
+
+terminalForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const command = terminalInput.value.trim().toLowerCase();
+  if (!command) return;
+  if (command === "clear") {
+    terminalOutput.textContent = "";
+  } else {
+    const response = terminalResponses[language][command] || (language === "en"
+      ? `Command not found: ${command}. Try help.`
+      : `Команда не найдена: ${command}. Попробуйте help.`);
+    terminalOutput.textContent += `\n\n$ ${command}\n${response}`;
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+  terminalInput.value = "";
+});
+
+document.querySelectorAll("[data-code-tab]").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const target = tab.dataset.codeTab;
+    document.querySelectorAll("[data-code-tab]").forEach((button) => {
+      const active = button === tab;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-selected", String(active));
+    });
+    document.querySelectorAll("[data-code-panel]").forEach((panel) => {
+      panel.hidden = panel.dataset.codePanel !== target;
+    });
+  });
+});
