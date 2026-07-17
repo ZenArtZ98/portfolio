@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SP">
-  <defs><linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#7ef0c6"/><stop offset="1" stop-color="#8ba7ff"/></linearGradient></defs>
-  <rect width="64" height="64" rx="18" fill="#07111f"/>
+  <defs><linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd400"/><stop offset="1" stop-color="#ffad00"/></linearGradient></defs>
+  <rect width="64" height="64" rx="18" fill="#050505"/>
   <rect x="2" y="2" width="60" height="60" rx="16" fill="none" stroke="url(#g)" stroke-width="2"/>
-  <text x="32" y="39" fill="url(#g)" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="22" font-weight="700" text-anchor="middle">SP</text>
+  <text x="32" y="39" fill="#ffd400" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="22" font-weight="800" text-anchor="middle">SP</text>
 </svg>
